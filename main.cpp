@@ -99,7 +99,7 @@ int main()
             cout << "Capturar Pasajeros" << endl;
             if(Terminal.getContVuelos() == 0) {
                 cout << "Error: no hay vuelos disponibles" <<endl;
-                return 0;
+                break;
             }
 
             Terminal.imprimirLista();
@@ -107,13 +107,13 @@ int main()
             cin>>id;
             cin.ignore();
             vueloAux.setId(id);
-            Vuelo &vuelo = Terminal.buscarNodo(vueloAux);
+            Vuelo* vuelo = Terminal.buscarNodo(vueloAux);
             Pasajero pasajero = capturaPasajero();
-            pasajero.setCiudadOrigen(vuelo.getCiudadOrigen());
-            pasajero.setCiudadDestino(vuelo.getCiudadDestino());
-            pasajero.setIdVuelo(vuelo.getID());
-            vuelo.setAsientosDisponibles(vuelo.getAsientosDisponibles() -1);
-            vuelo.agregarPasajero(pasajero);
+            pasajero.setCiudadOrigen(vuelo->getCiudadOrigen());
+            pasajero.setCiudadDestino(vuelo->getCiudadDestino());
+            pasajero.setIdVuelo(vuelo->getID());
+            vuelo->setAsientosDisponibles(vuelo->getAsientosDisponibles() -1);
+            vuelo->agregarPasajero(pasajero);
             break;
         }
         
@@ -121,30 +121,31 @@ int main()
         {
          int id, opc, valorInt, ID;
             cout << "Modificar Pasajeros" <<endl;
-            Vuelo vuelo, vueloAux;
+            Vuelo* vuelo;
+            Vuelo vueloAux;
             Pasajero pasajeroAux;
             string valor;
 
             if(Terminal.getContVuelos() == 0) {
                 cout << "Error: no hay vuelos disponibles" <<endl;
-                return 0;
+                break;
             }
 
             cout << "Seleccione un ID de Vuelo" <<endl;
             cin>>id;
-            vuelo.setId(id);
+            vuelo->setId(id);
             vuelo = Terminal.buscarNodo(vueloAux);
 
-            if(vuelo.getContPasajeros() == 0) {
+            if(vuelo->getContPasajeros() == 0) {
                 cout << "Error: no hay pasajeros disponibles" <<endl;
-                return 0;
+                break;
             }
 
-            vuelo.mostrarPasajeros();
+            vuelo->mostrarPasajeros();
             cout << "Seleccione un ID de Pasajero" <<endl;
             cin>>ID;
             pasajeroAux.setId(ID);
-            Pasajero &pasajero = vuelo.buscarPasajero(pasajeroAux);
+            Pasajero* pasajero = vuelo->buscarPasajero(pasajeroAux);
             
             cout << "MODIFICAR PASAJERO" <<endl;
             cout << "1) Modificar Nombre" <<endl;
@@ -161,7 +162,7 @@ int main()
                 cout << "Nombre" <<endl;
                 cout << "Ingresa nuevo valor" <<endl;
                 getline(cin, valor);
-                pasajero.setNombre(valor);
+                pasajero->setNombre(valor);
                 break;
             }
 
@@ -170,7 +171,7 @@ int main()
                 cout << "Apellido" <<endl;
                 cout << "Ingresa nuevo valor" <<endl;
                 getline(cin, valor);
-                pasajero.setApellido(valor);
+                pasajero->setApellido(valor);
                 break;
             }
 
@@ -180,7 +181,7 @@ int main()
                 cout << "Ingresa nuevo valor" <<endl;
                 cin>>valorInt;
                 cin.ignore();
-                pasajero.setEdad(valorInt);
+                pasajero->setEdad(valorInt);
                 break;
             }
 
@@ -189,7 +190,7 @@ int main()
                 cout << "Asiento" <<endl;
                 cout << "Ingresa nuevo valor" <<endl;
                 getline(cin, valor);
-                pasajero.setAsiento(valor);
+                pasajero->setAsiento(valor);
                 break;
             }
 
@@ -203,11 +204,12 @@ int main()
         {
             cout << "Mostrar Pasajeros" <<endl;
             int id;
-            Vuelo vueloAux, vuelo;
+            Vuelo vueloAux;
+            Vuelo* vuelo;
 
             if(Terminal.getContVuelos() == 0) {
                 cout << "Error: no hay vuelos disponibles" <<endl;
-                return 0;
+                break;
             }
 
             Terminal.imprimirLista();
@@ -216,12 +218,12 @@ int main()
             vueloAux.setId(id);
             vuelo = Terminal.buscarNodo(vueloAux);
 
-            if(vuelo.getContPasajeros() == 0) {
+            if(vuelo->getContPasajeros() == 0) {
                 cout << "Error: no hay pasajeros disponibles" <<endl;
-                return 0;
+                break;
             }
 
-            vuelo.mostrarPasajeros();
+            vuelo->mostrarPasajeros();
             break;
         }
         
@@ -240,18 +242,24 @@ int main()
         {
             int id, opc, valorInt;
             cout << "Modificar Vuelos" <<endl;
-            Vuelo vuelo, vueloAux;
+            Vuelo vueloAux;
             string valor;
 
             if(Terminal.getContVuelos() == 0) {
                 cout << "Error: no hay vuelos disponibles" <<endl;
-                return 0;
+                break;
             }
+
+            Terminal.imprimirLista();
 
             cout << "Seleccione un ID de Vuelo" <<endl;
             cin>>id;
-            vuelo.setId(id);
-            vuelo = Terminal.buscarNodo(vueloAux);
+            vueloAux.setId(id);
+            Vuelo* vuelo = Terminal.buscarNodo(vueloAux);
+            if(vuelo == nullptr) {
+                cout << "Error: ID no valido" <<endl;
+                break;
+            }
 
             cout << "MODIFICAR VUELO" <<endl;
             cout << "1) Modificar ciudadOrigen" <<endl;
@@ -259,9 +267,8 @@ int main()
             cout << "3) Modificar fechaSalida" <<endl;
             cout << "4) Modificar fechaArribo" <<endl;
             cout << "5) Modificar distancia de Vuelo" <<endl;
-            cout << "6) Modificar capacidad de Pasajeros" <<endl;
+            cout << "6) Modificar asientos Disponibles" <<endl;
             cout << "7) Modificar capacidad de Carga" <<endl;
-            cout << "8) Modificar asientos Disponibles" <<endl;
             cin>>opc;
             cin.ignore();
 
@@ -272,7 +279,8 @@ int main()
                 cout << "Ciudad Origen" <<endl;
                 cout << "Ingresa nuevo valor" <<endl;
                 getline(cin, valor);
-                vuelo.setCiudadOrigen(valor);
+                vuelo->setCiudadOrigen(valor);
+                cout << "Se ha actualizado la informacion" <<endl;
                 break;
             }
             
@@ -281,7 +289,8 @@ int main()
                 cout << "Ciudad Destino" <<endl;
                 cout << "Ingresa nuevo valor" <<endl;
                 getline(cin, valor);
-                vuelo.setCiudadDestino(valor);
+                vuelo->setCiudadDestino(valor);
+                cout << "Se ha actualizado la informacion" <<endl;
                 break;
             }
 
@@ -290,7 +299,8 @@ int main()
                 cout << "Fecha Salida" <<endl;
                 cout << "Ingresa nuevo valor" <<endl;
                 getline(cin, valor);
-                vuelo.setFechaSalida(valor);
+                vuelo->setFechaSalida(valor);
+                cout << "Se ha actualizado la informacion" <<endl;
                 break;
             }
 
@@ -299,7 +309,8 @@ int main()
                 cout << "Fecha Arribo" <<endl;
                 cout << "Ingresa nuevo valor" <<endl;
                 getline(cin, valor);
-                vuelo.setFechaArribo(valor);
+                vuelo->setFechaArribo(valor);
+                cout << "Se ha actualizado la informacion" <<endl;
                 break;
             }
 
@@ -308,31 +319,35 @@ int main()
                 cout << "Distancia de Vuelo" <<endl;
                 cout << "Ingresa nuevo valor" <<endl;
                 cin>>valorInt;
-                vuelo.setDistanciaVuelo(valorInt);
+                vuelo->setDistanciaVuelo(valorInt);
+                cout << "Se ha actualizado la informacion" <<endl;
                 break;
             }
 
             case 6:
             {
-                cout << "Capacidad Pasajeros" <<endl;
+                cout << "Asientos Disponibles" <<endl;
                 cout << "Ingresa nuevo valor" <<endl;
                 cin>>valorInt;
-                vuelo.setCapacidadPasajeros(valorInt);
+                vuelo->setAsientosDisponibles(valorInt);
+                cout << "Se ha actualizado la informacion" <<endl;
                 break;
             }
 
             case 7:
             {
-                cout << "Asientos Disponibles" <<endl;
+                cout << "Capacidad de Carga" <<endl;
                 cout << "Ingresa nuevo valor" <<endl;
                 cin>>valorInt;
-                vuelo.setAsientosDisponibles(valorInt);
+                vuelo->setCapacidadCarga(valorInt);
+                cout << "Se ha actualizado la informacion" <<endl;
                 break;
             }
 
             default: cout << "Opcion no valida" <<endl;
                 break;
             }
+            break;
         }
         
         case 6:
@@ -353,43 +368,74 @@ int main()
         {
             cout << "ELIMINAR PASAJERO" <<endl;
             int id, opc, valorInt, ID;
-            Vuelo vuelo, vueloAux;
+            Vuelo vueloAux;
             Pasajero pasajeroAux;
             string valor;
 
             if(Terminal.getContVuelos() == 0) {
                 cout << "Error: no hay vuelos disponibles" <<endl;
-                return 0;
+                break;
             }
 
             cout << "Seleccione un ID de Vuelo" <<endl;
             cin>>id;
-            vuelo.setId(id);
-            vuelo = Terminal.buscarNodo(vueloAux);
+            vueloAux.setId(id);
+            Vuelo* vuelo = Terminal.buscarNodo(vueloAux);
 
-            if(vuelo.getContPasajeros() == 0) {
-                cout << "Error: no hay pasajeros disponibles" <<endl;
-                return 0;
+            if(vuelo == nullptr) {
+                cout << "Error: ID no valido" <<endl;
+                break;
             }
 
-            vuelo.mostrarPasajeros();
+            if(vuelo->getContPasajeros() == 0) {
+                cout << "Error: no hay pasajeros disponibles" <<endl;
+                break;
+            }
+
+            vuelo->mostrarPasajeros();
             cout << "Seleccione un ID de Pasajero" <<endl;
             cin>>ID;
             pasajeroAux.setId(ID);
-            Pasajero &pasajero = vuelo.buscarPasajero(pasajeroAux);
-            vuelo.eliminarPasajero(pasajero);
+            Pasajero* pasajero = vuelo->buscarPasajero(pasajeroAux);
+
+            if(pasajero == nullptr) {
+                cout << "Error: ID no valido" <<endl;
+                break;
+            }
+
+            vuelo->eliminarPasajero(*pasajero);
+            cout << "Pasajero con el ID " << pasajero->getID() << " eliminado correctamente" <<endl;
+            break;
         }
 
         case 8: {
             int id;
             cout << "ELIMINAR VUELO" <<endl;
-            Vuelo vuelo;
+            Vuelo* vuelo;
+            Vuelo vueloAux;
+
+            if(Terminal.getContVuelos() == 0) {
+                cout << "Error: no hay vuelos disponibles" <<endl;
+                break;
+            }
+
             Terminal.imprimirLista();
             cout << "Seleccione un ID de Vuelo" <<endl;
             cin>>id;
-            vuelo.setId(id);
-            Terminal.eliminarNodo(vuelo);
-            cout << "Vuelo eliminado correctamente" <<endl;
+            cin.ignore();
+
+            vueloAux.setId(id);;
+
+            vuelo = Terminal.buscarNodo(vueloAux);
+
+            if(vuelo == nullptr) {
+                cout << "Error: ID no valido" <<endl;
+                break;
+            }
+
+            Terminal.eliminarNodo(*vuelo);
+            cout << "Vuelo con el ID " << vuelo->getID() << " eliminado correctamente" <<endl;
+            break;
         }
 
         default: cout << "Opcion no valida intentalo de nuevo" <<endl;

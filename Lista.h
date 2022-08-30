@@ -12,7 +12,7 @@ public:
     ~ListaDobleLigada(); //DESTRUCTOR
     bool empty();
     void insertar(T &dato);
-    T& buscarNodo(T &dato);
+    T* buscarNodo(T &dato);
     T& modificarNodo(T &dato);
     void eliminarNodo(T &dato);
     void imprimirLista();
@@ -75,7 +75,7 @@ void ListaDobleLigada<T>::insertar(T &dato)
 };
 
 template<class T>
-T& ListaDobleLigada<T>::buscarNodo(T& nodoBuscado){
+T* ListaDobleLigada<T>::buscarNodo(T& nodoBuscado){
 	Nodo* actual = new Nodo();
 	actual = primero;
 	bool encontrado = false;
@@ -84,8 +84,7 @@ T& ListaDobleLigada<T>::buscarNodo(T& nodoBuscado){
 		while(actual!=NULL && encontrado!=true){
 			
 			if(actual->dato == nodoBuscado){
-				cout << "Registro encontrado" <<endl;
-				return actual->dato;
+				return &actual->dato;
 				encontrado = true;
 			}
 			
@@ -93,12 +92,16 @@ T& ListaDobleLigada<T>::buscarNodo(T& nodoBuscado){
 		}
 		
 		if(!encontrado){
-			cout << "Registro no Encontrado";
+			cout << "Registro no Encontrado" <<endl;
+			return nullptr;
 		}
 		
 	}else{
-		cout << "La listas se encuentra Vacia";
+		cout << "La listas se encuentra Vacia" <<endl;
+		return nullptr;
 	}
+
+	return nullptr;
 };
 
 template<class T>
@@ -112,7 +115,6 @@ T& ListaDobleLigada<T>::modificarNodo(T& nodoModificado){
 		while(actual!=NULL && encontrado!=true){
 			
 			if(actual->dato == nodoModificado){
-				cout << "Busqueda exitosa!!" <<endl;
 				encontrado = true;
 				return actual->dato;
 			}
@@ -121,11 +123,11 @@ T& ListaDobleLigada<T>::modificarNodo(T& nodoModificado){
 		}
 		
 		if(!encontrado){
-			cout << "Nodo no Encontrado";
+			cout << "Registro no Encontrado" <<endl;
 		}
 		
 	}else{
-		cout << "La listas se encuentra Vacia";
+		cout << "La listas se encuentra Vacia" <<endl;
 	}
 }
 
@@ -141,7 +143,6 @@ void ListaDobleLigada<T>::eliminarNodo(T& nodoBuscado){
 		while(actual!=NULL && encontrado!=true){
 			
 			if(actual->dato.getID() == nodoBuscado.getID()){
-				cout << "Registro encontrado" <<endl;
 				
 				if(actual==primero){
 					primero = primero->siguiente;
@@ -154,7 +155,7 @@ void ListaDobleLigada<T>::eliminarNodo(T& nodoBuscado){
 					actual->siguiente->anterior = anterior;
 				}
 				
-				cout << "Registro eliminado";
+				cout << "Registro eliminado" <<endl;
 				encontrado = true;
 			}
 			anterior = actual;
@@ -162,11 +163,11 @@ void ListaDobleLigada<T>::eliminarNodo(T& nodoBuscado){
 		}
 		
 		if(!encontrado){
-			cout << "Registro no Encontrado";
+			cout << "Registro no Encontrado" <<endl;
 		}
 		
 	}else{
-		cout << "La listas se encuentra Vacia";
+		cout << "La listas se encuentra Vacia" <<endl;
 	}
 }
 

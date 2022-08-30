@@ -29,7 +29,7 @@ void Vuelo::agregarPasajero(Pasajero pasajero)
     contPasajeros++;
 };
 
-Pasajero& Vuelo::buscarPasajero(Pasajero pasajero)
+Pasajero* Vuelo::buscarPasajero(Pasajero pasajero)
 {
     return pasajeros.buscarNodo(pasajero);
 }

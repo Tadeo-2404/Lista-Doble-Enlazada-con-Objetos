@@ -44,15 +44,17 @@ public:
     friend ostream &operator<<(ostream &out, const Pasajero &p)
     {
         out << left;
-        out << setw(8) << p.ID;
-        out << setw(8) << p.nombre;
-        out << setw(8) << p.apellido;
-        out << setw(8) << p.edad;
-        out << setw(8) << p.ciudadOrigen;
-        out << setw(8) << p.ciudadDestino;
-        out << setw(8) << p.asiento;
-        out << setw(8) << p.idVuelo;
-        out << endl;
+        out << setw(5) << "ID" << setw(15) << "Nombre" << setw(15) << "Apellido" << setw(15) << "Edad" << setw(15) << "CiudadOrigen" << setw(15) << "CiudadDestino" << setw(20) << "Asiento" << setw(20) << "IDVuelo" <<endl;
+        out << left;
+        out << setw(5) << p.ID;
+        out << setw(15) << p.nombre;
+        out << setw(15) << p.apellido;
+        out << setw(15) << p.edad;
+        out << setw(15) << p.ciudadOrigen;
+        out << setw(15) << p.ciudadDestino;
+        out << setw(20) << p.asiento;
+        out << setw(20) << p.idVuelo;
+        out <<endl;
         return out;
     }
 

@@ -26,7 +26,7 @@ public:
    void mostrarPasajeros();
    void modificarPasajero(Pasajero pasajero);
    void eliminarPasajero(Pasajero pasajero);
-   Pasajero& buscarPasajero(Pasajero pasajero);
+   Pasajero* buscarPasajero(Pasajero pasajero);
     //getters
     string getCiudadOrigen();
     string getCiudadDestino();
