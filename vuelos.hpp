@@ -28,6 +28,7 @@ public:
    void modificarPasajero(Pasajero pasajero);
    void eliminarPasajero(Pasajero pasajero);
    Pasajero* buscarPasajero(Pasajero pasajero);
+   void actualizarValorPasajeros(size_t opc, string str);
     //getters
     string getCiudadOrigen();
     string getCiudadDestino();

@@ -16,6 +16,7 @@ public:
     T& modificarNodo(T &dato);
     void eliminarNodo(T &dato);
     void imprimirLista();
+	void actualizarValorPasajeros(size_t pos, string str);
 	int getContVuelos() {
 		return this->contVuelos;
 	};
@@ -195,6 +196,35 @@ void ListaDobleLigada<T>::imprimirLista(){
 	}
 }
 
+template <class T>
+void ListaDobleLigada<T>::actualizarValorPasajeros(size_t pos, string str)
+{
+	Nodo *actual = new Nodo();
+	actual = primero;
+
+	while (actual != NULL)
+	{
+		switch (pos)
+		{
+		case 1:
+		{
+		    actual->dato.setCiudadOrigen(str);
+			break;
+		}
+
+		case 2:
+		{
+		    actual->dato.setCiudadDestino(str);
+			break;
+		}
+		
+		default:
+			break;
+		}
+
+		actual = actual->siguiente;
+	}
+}
 
 template <class T>
 size_t ListaDobleLigada<T>::size()

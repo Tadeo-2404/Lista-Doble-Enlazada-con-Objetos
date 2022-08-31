@@ -49,6 +49,11 @@ void Vuelo::mostrarPasajeros()
     pasajeros.imprimirLista();
 }
 
+void Vuelo::actualizarValorPasajeros(size_t opc, string str)
+{
+    pasajeros.actualizarValorPasajeros(opc, str);
+}
+
 string Vuelo::getCiudadOrigen() 
 {
     return this->ciudadOrigen;

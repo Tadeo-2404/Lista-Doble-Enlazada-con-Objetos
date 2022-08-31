@@ -312,6 +312,7 @@ int main()
                 cout << "Ingresa nuevo valor" << endl;
                 getline(cin, valor);
                 vuelo->setCiudadOrigen(valor);
+                vuelo->actualizarValorPasajeros(1, valor);
                 cout << "Se ha actualizado la informacion" << endl;
                 break;
             }
@@ -322,6 +323,7 @@ int main()
                 cout << "Ingresa nuevo valor" << endl;
                 getline(cin, valor);
                 vuelo->setCiudadDestino(valor);
+                vuelo->actualizarValorPasajeros(2, valor);
                 cout << "Se ha actualizado la informacion" << endl;
                 break;
             }
