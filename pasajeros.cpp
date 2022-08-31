@@ -8,7 +8,7 @@ Pasajero::Pasajero()
 }
 
 //Constructor con parametros
-Pasajero::Pasajero(int ID, string nombre, string apellido, int edad, string ciudadOrigen, string ciudadDestino, string asiento, int IDVuelo)
+Pasajero::Pasajero(size_t ID, string nombre, string apellido, size_t edad, string ciudadOrigen, string ciudadDestino, string asiento, size_t IDVuelo)
 {
     this->ID = ID;
     this->nombre = nombre;
@@ -33,7 +33,7 @@ string Pasajero::getApellido()
 }
 
 //getEdad
-int Pasajero::getEdad()
+size_t Pasajero::getEdad()
 {
     return this->edad;
 }
@@ -80,12 +80,12 @@ void Pasajero::setApellido(string apellido)
 }
 
 //setEdad
-void Pasajero::setEdad(int edad)
+void Pasajero::setEdad(size_t edad)
 {
     this->edad = edad;
 };
 
-void Pasajero::setId(int id) 
+void Pasajero::setId(size_t id) 
 {
     this->ID = id;
 };
@@ -108,6 +108,6 @@ void Pasajero::setAsiento(string asiento)
     this->asiento = asiento;
 };
 
-void Pasajero::setIdVuelo(int id) {
+void Pasajero::setIdVuelo(size_t id) {
     this->idVuelo = id;
 }

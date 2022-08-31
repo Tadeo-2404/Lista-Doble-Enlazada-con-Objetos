@@ -21,6 +21,7 @@ class Vuelo {
 public:
    Vuelo();
    Vuelo(int ID, string ciudadOrigen, string ciudadDestino, string fechaSalida, string fechaArribo, int distanciaVuelo, int capacidadPasajeros, int capacidadCarga, int asientosDisponibles);
+   ~Vuelo();
 
    void agregarPasajero(Pasajero pasajero);
    void mostrarPasajeros();

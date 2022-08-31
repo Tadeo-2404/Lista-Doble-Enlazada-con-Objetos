@@ -5,7 +5,9 @@ using namespace std;
 
 Vuelo::Vuelo()
 {
+
 }
+
 
 Vuelo::Vuelo(int ID, string ciudadOrigen, string ciudadDestino, string fechaSalida, string fechaArribo, int distanciaVuelo, int capacidadPasajeros, int capacidadCarga, int asientosDisponibles)
 {
@@ -19,6 +21,9 @@ Vuelo::Vuelo(int ID, string ciudadOrigen, string ciudadDestino, string fechaSali
     this->capacidadDeCarga = capacidadCarga;
     this->asientosDisponibles = asientosDisponibles;
 }
+
+Vuelo::~Vuelo() {
+};
 
 void Vuelo::agregarPasajero(Pasajero pasajero)
 {

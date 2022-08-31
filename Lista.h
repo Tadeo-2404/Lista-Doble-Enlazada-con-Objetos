@@ -51,7 +51,15 @@ ListaDobleLigada<T>::ListaDobleLigada()
 template <class T>
 ListaDobleLigada<T>::~ListaDobleLigada()
 {
-    // eliminar todos los nodos
+	Nodo *actual = primero;
+	Nodo *siguiente;
+
+	while (actual != NULL)
+	{
+		siguiente = actual->siguiente;
+		delete actual;
+		actual = siguiente;
+	}
 }
 
 template <class T>

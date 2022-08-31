@@ -5,11 +5,11 @@
 using namespace std;
 
 class Pasajero {
-    int ID;
-    int idVuelo;
+    size_t ID;
+    size_t idVuelo;
     string nombre;
     string apellido;
-    int edad;
+    size_t edad;
     string ciudadOrigen;
     string ciudadDestino;
     string asiento;
@@ -18,12 +18,12 @@ public:
 
     //constructores
     Pasajero();
-    Pasajero(int ID, string nombre, string apellido, int edad, string ciudadOrigen, string ciudadDestino, string asiento, int IDVuelo);
+    Pasajero(size_t ID, string nombre, string apellido, size_t edad, string ciudadOrigen, string ciudadDestino, string asiento, size_t IDVuelo);
 
     //getters
     string getNombre();
     string getApellido();
-    int getEdad();
+    size_t getEdad();
     string getCiudadOrigen();
     string getCiudadDestino();
     string getAsiento();
@@ -34,12 +34,12 @@ public:
     //setters
     void setNombre(string nombre);
     void setApellido(string apellido);
-    void setEdad(int edad);
+    void setEdad(size_t edad);
     void setCiudadOrigen(string ciudadOrigen);
     void setCiudadDestino(string ciuidadDestino);
     void setAsiento(string asiento);
-    void setIdVuelo(int id);
-    void setId(int Id);
+    void setIdVuelo(size_t id);
+    void setId(size_t Id);
 
     friend ostream &operator<<(ostream &out, const Pasajero &p)
     {
